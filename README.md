@@ -85,6 +85,7 @@ Run the application:
 email
 
 example@example.com
+
 admin@test.com
 
 ## Example output
@@ -92,6 +93,7 @@ admin@test.com
 email_address,breached,site_where_breached
 
 example@example.com,True,Adobe;Dropbox
+
 admin@test.com,False,
 
 ## Architecture Diagram
