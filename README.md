@@ -90,7 +90,7 @@ example@example.com,True,Adobe;Dropbox
 admin@test.com,False,
 
 ## Architecture Diagram
-
+```
                 +----------------------+
                 |    config.yaml       |
                 |   .env / API key     |
@@ -126,7 +126,7 @@ admin@test.com,False,
           +----------------+   +-------------+
           |output_result.csv|   |  report.md  |
           +----------------+   +-------------+
-
+```
 ## Limitations
 
 - The tool currently checks only email addresses.
@@ -142,3 +142,7 @@ Run tests with:
 
     bash
         pytest
+
+## CI Pipeline 
+
+CI pipeline exists and works and will fail if the tests do not pass checked this with github actions. 
