@@ -45,6 +45,6 @@ def test_write_emails_writes_expected_csv(tmp_path):
 
     assert rows == [
         ["email_address", "breached", "site_where_breached"],
-        ["example@example.com", "Y", "Adobe;Dropbox"],
-        ["admin@test.com", "N", ""],
+        ["example@example.com", "True", "Adobe;Dropbox"],
+        ["admin@test.com", "False", ""],
     ]

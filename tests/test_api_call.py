@@ -2,6 +2,13 @@ from unittest.mock import Mock, patch
 import requests
 from alc_breach_tool.api_call import api_call_xposedornot
 
+test_config = {
+    "api_url": "https://api.xposedornot.com/v1/check-email/{email}",
+    "timeout_seconds": 15,
+    "max_retries": 3,
+    "backoff_base_seconds": 1.0,
+}
+
 
 def test_api_call_xposedornot_breached():
     fake_response = Mock()
@@ -11,7 +18,7 @@ def test_api_call_xposedornot_breached():
     }
 
     with patch("alc_breach_tool.api_call.requests.get", return_value=fake_response):
-        result = api_call_xposedornot(["example@example.com"])
+        result = api_call_xposedornot(["example@example.com"], test_config)
 
     assert result == [
         {
@@ -30,7 +37,7 @@ def test_api_call_xposedornot_not_breached():
     }
 
     with patch("alc_breach_tool.api_call.requests.get", return_value=fake_response):
-        result = api_call_xposedornot(["admin@test.com"])
+        result = api_call_xposedornot(["admin@test.com"], test_config)
 
     assert result == [
         {
@@ -46,7 +53,7 @@ def test_api_call_xposedornot_timeout():
         "alc_breach_tool.api_call.requests.get",
         side_effect=requests.exceptions.Timeout
     ):
-        result = api_call_xposedornot(["example@example.com"])
+        result = api_call_xposedornot(["example@example.com"], test_config)
 
     assert result == [
         {
@@ -56,6 +63,7 @@ def test_api_call_xposedornot_timeout():
             "error": ""
         }
     ]
+
 
 def test_api_call_xposedornot_retries_after_429():
     first_response = Mock()
@@ -71,7 +79,7 @@ def test_api_call_xposedornot_retries_after_429():
         "alc_breach_tool.api_call.requests.get",
         side_effect=[first_response, second_response]
     ), patch("alc_breach_tool.api_call.time.sleep") as mock_sleep:
-        result = api_call_xposedornot(["admin@test.com"])
+        result = api_call_xposedornot(["admin@test.com"], test_config)
 
     assert result == [
         {
@@ -80,4 +88,4 @@ def test_api_call_xposedornot_retries_after_429():
             "breaches": []
         }
     ]
-    mock_sleep.assert_called_once_with(1)
+    mock_sleep.assert_called_once_with(1.0)
