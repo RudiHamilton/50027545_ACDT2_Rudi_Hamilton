@@ -1,0 +1,7 @@
+api_url: "https://api.xposedornot.com/v1/check-email/{email}"
+timeout_seconds: 15
+max_retries: 3
+backoff_base_seconds: 1.0
+input_csv: "data/email_list.csv"
+output_csv: "data/output_result.csv"
+log_file: "logs/app.log"
