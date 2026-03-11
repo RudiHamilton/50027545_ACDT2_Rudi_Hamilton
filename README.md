@@ -18,6 +18,7 @@ The tool reads email addresses from a CSV file, queries a breach intelligence pr
 - Unit tests for core functionality
 
 ## Project Structure
+```
 .
 ├── config.yaml
 ├── requirements.txt
@@ -42,20 +43,22 @@ The tool reads email addresses from a CSV file, queries a breach intelligence pr
 │       └── logging_config.py
 │
 └── tests/
-
+```
 ## Installation
 
 Clone the repository and install dependencies:
 
 Unix:
-    bash
-        python -m venv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
+```
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+```
 
 Windows:
-    bash
-        .venv\Scripts\activate
+```
+    .venv\Scripts\activate
+```
 
 ## Configuration
 
